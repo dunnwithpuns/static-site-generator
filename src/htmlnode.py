@@ -14,8 +14,8 @@ class HTMLNode:
         for i in self.props:
             output += f"{i}={self.props[i]} "
 
-        output.rstrip(" ")
+        output = output.rstrip(" ")
         return output
 
     def __repr__(self):
-        print(f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})")
+        return (f"HTMLNode(tag={self.tag}, value={self.value}, children={self.children}, props={self.props})")
