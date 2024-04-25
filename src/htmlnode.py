@@ -18,4 +18,6 @@ class HTMLNode:
         return output
 
     def __repr__(self):
-        return (f"HTMLNode(tag={self.tag}, value={self.value}, children={self.children}, props={self.props_to_html()})")
+        children_repr = 'None' if self.children is None else self.children
+        props_repr = 'None' if self.props is None else self.props_to_html() 
+        return (f"HTMLNode(tag={self.tag}, value={self.value}, children={children_repr}, props={props_repr})")
