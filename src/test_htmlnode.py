@@ -10,7 +10,11 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_args(self):
         node = HTMLNode("p", "this is value text", "<p>", {"href": "https://www.google.com"})
-        expected_repr = """HTMLNode(tag="p", value="this is value text", children="<p>", props="href=https://www.google.com")"""
+        expected_repr = """HTMLNode(tag=p, value=this is value text, children=<p>, props=href=https://www.google.com)"""
+        self.assertEqual(repr(node), expected_repr)
+
+    # def test_props(self):
+
 
 if __name__ == '__main__':
     unittest.main()
