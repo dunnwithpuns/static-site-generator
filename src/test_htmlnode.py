@@ -9,18 +9,18 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(repr(node), expected_repr)
 
     def test_args(self):
-        node = HTMLNode("p", "this is value text", "<p>", {"href": "https://www.google.com"})
-        expected_repr = """HTMLNode(tag=p, value=this is value text, children=<p>, props=href=https://www.google.com)"""
+        node = HTMLNode("p", "this is value text", "<p>", {"href": "https://www.google.com", "target": "_blank"})
+        expected_repr = """HTMLNode(tag=p, value=this is value text, children=<p>, props=href=https://www.google.com target=_blank)"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_tag(self):
-        node = HTMLNode(value="this is value text", children="<p>", props={"href": "https://www.google.com"})
-        expected_repr = """HTMLNode(tag=None, value=this is value text, children=<p>, props=href=https://www.google.com)""" 
+        node = HTMLNode(value="this is value text", children="<p>", props={"href": "https://www.google.com", "target": "_blank"})
+        expected_repr = """HTMLNode(tag=None, value=this is value text, children=<p>, props=href=https://www.google.com target=_blank)""" 
         self.assertEqual(repr(node), expected_repr)
 
     def test_children(self):
-        node = HTMLNode(tag="p", value="this is value text", props={"href": "https://www.google.com"})
-        expected_repr = """HTMLNode(tag=p, value=this is value text, children=None, props=href=https://www.google.com)"""
+        node = HTMLNode(tag="p", value="this is value text", props={"href": "https://www.google.com", "target": "_blank"})
+        expected_repr = """HTMLNode(tag=p, value=this is value text, children=None, props=href=https://www.google.com target=_blank)"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_props(self):
