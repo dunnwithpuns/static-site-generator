@@ -11,10 +11,9 @@ class HTMLNode:
     def props_to_html(self):
         output = ""
 
-        for i in self.props:
-            output += f"{i}={self.props[i]} "
+        for key, value in self.props.items():
+            output += f''' {key}=\"{value}\"'''
 
-        output = output.rstrip(" ")
         return output
 
     def __repr__(self):
@@ -24,7 +23,7 @@ class HTMLNode:
     
 class LeafNode(HTMLNode):
     def __init__(self, tag=None, value=None, props=None):
-        super().__init__()
+        super().__init__(tag, value, props)
     
     def to_html(self):
 
@@ -32,7 +31,7 @@ class LeafNode(HTMLNode):
             raise ValueError("All leaf nodes require a value")
         elif self.tag == None:
             return self.value
-        elif self.props == None:
-            return f"<{self.tag}>{self.value}</{self.tag}>"
         else:
-            return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}"
+            props_str = self.props_to_html() if self.props else ""
+            return f"<{self.tag}{props_str}>{self.value}</{self.tag}"
+        
