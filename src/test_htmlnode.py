@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_default(self):
@@ -43,5 +43,31 @@ class TestHTMLNode(unittest.TestCase):
         with self.assertRaises(ValueError):
             node.to_html()
     
+    def test_ParentNode(self):
+        node = ParentNode(
+            "p",
+            [
+                LeafNode("b", "Bold text"),
+                LeafNode(None, "Normal text"),
+                LeafNode("i", "italic text"),
+                LeafNode(None, "Normal text"),
+            ],
+        )
+        expected = "<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>"
+        self.assertEqual(node.to_html(), expected)
+
+    def test_ParentNode_tag(self):
+        node = ParentNode(
+            None,
+            [
+                LeafNode("b", "Bold text"),
+                LeafNode(None, "Normal text"),
+                LeafNode("i", "italic text"),
+                LeafNode(None, "Normal text"),
+            ],
+        )
+        with self.assertRaises(ValueError):
+            node.to_html()
+
 if __name__ == '__main__':
     unittest.main()
