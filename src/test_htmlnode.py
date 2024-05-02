@@ -69,5 +69,23 @@ class TestHTMLNode(unittest.TestCase):
         with self.assertRaises(ValueError):
             node.to_html()
 
+    def test_ParentNode_Nest(self):
+        node = ParentNode(
+            "h",
+            [
+                ParentNode(
+                    "p",
+                    [
+                        LeafNode("b", "Bold text"),
+                        LeafNode(None, "Normal text"),
+                        LeafNode("i", "italic text"),
+                        LeafNode(None, "Normal text"),
+                    ]
+                )
+            ]
+        )
+        expected = "<h><p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p></h>"
+        self.assertEqual(node.to_html(), expected)
+
 if __name__ == '__main__':
     unittest.main()
