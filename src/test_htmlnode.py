@@ -87,5 +87,46 @@ class TestHTMLNode(unittest.TestCase):
         expected = "<h><p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p></h>"
         self.assertEqual(node.to_html(), expected)
 
+    def test_ParentNode_children(self):
+        node = ParentNode(
+            "h",[]
+        )
+        with self.assertRaises(ValueError):
+            node.to_html()
+    
+    def test_ParentNode_children1(self):
+        node = ParentNode(
+            "h", None
+        )
+        with self.assertRaises(ValueError):
+            node.to_html()
+
+    def test_ParentNode_ComplexNesting(self):
+        node = ParentNode(
+            "div",
+            [
+                ParentNode(
+                    "ul",
+                    [
+                        ParentNode(
+                            "li",
+                            [LeafNode(None, "Item 1")],
+                        ),
+                        ParentNode(
+                            "li",
+                            [LeafNode(None, "Item 2"),
+                            ParentNode(
+                                "ul",
+                                [LeafNode("li", "Subitem 1"),
+                                LeafNode("li", "Subitem 2")]
+                            )]
+                        ),
+                    ]
+                )
+            ]
+        )
+        expected = "<div><ul><li>Item 1</li><li>Item 2<ul><li>Subitem 1</li><li>Subitem 2</li></ul></li></ul></div>"
+        self.assertEqual(node.to_html(), expected)
+
 if __name__ == '__main__':
     unittest.main()
