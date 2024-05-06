@@ -56,11 +56,6 @@ class TestTextNode(unittest.TestCase):
         expected = LeafNode("img", value="", props={"src": "https://www.google.com", "alt": "This is an image link"})
         self.assertEqual(node.to_html(), expected.to_html())
     
-    def text_split_delimiter(self):
-        node = TextNode("This is text with a `code block` word", text_type_text)
-        new_nodes = split_nodes_delimiter([node], "`", text_type_code)
-        expected = [TextNode("This is text with a ", text_type_text), TextNode("code block", text_type_code), TextNode(" word", text_type_text),]
-        self.assertEqual(new_nodes, expected)
-
+   
 if __name__ == "__main__":
     unittest.main()

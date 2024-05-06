@@ -39,18 +39,3 @@ def text_node_to_html_node(text_node):
         return LeafNode("img", value="", props={"src": text_node.url, "alt": text_node.text})
     raise ValueError(f"Invalid text type: {text_node.text_type}")
 
-def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    new_nodes = []
-    for node in old_nodes:
-        if text_type != text_type_text:
-            new_nodes.append(node)
-        split_text = node.text.split(delimiter)
-        counter = 0 
-        for text in split_text:
-            if counter != 1:
-                counter += 1
-                new_nodes.append(TextNode(text, text_type_text))
-            if counter == 1:
-                counter += 1
-                new_nodes.append(TextNode(text, text_type)) 
-    return new_nodes 
