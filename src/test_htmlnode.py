@@ -5,32 +5,32 @@ from htmlnode import HTMLNode, LeafNode, ParentNode
 class TestHTMLNode(unittest.TestCase):
     def test_default(self):
         node = HTMLNode()
-        expected_repr = "HTMLNode(tag=None, value=None, children=None, props=None)"
+        expected_repr = "HTMLNode(None, None, children: None, )"
         self.assertEqual(repr(node), expected_repr)
 
     def test_args(self):
         node = HTMLNode("p", "this is value text", "<p>", {"href": "https://www.google.com", "target": "_blank"})
-        expected_repr = """HTMLNode(p, this is value text, <p>, href="https://www.google.com" target="_blank")"""
+        expected_repr = """HTMLNode(p, this is value text, children: <p>, href="https://www.google.com" target="_blank")"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_tag(self):
         node = HTMLNode(value="this is value text", children="<p>", props={"href": "https://www.google.com", "target": "_blank"})
-        expected_repr = """HTMLNode(None, this is value text, <p>, href="https://www.google.com" target="_blank")""" 
+        expected_repr = """HTMLNode(None, this is value text, children: <p>, href="https://www.google.com" target="_blank")""" 
         self.assertEqual(repr(node), expected_repr)
 
     def test_value(self):
         node = HTMLNode(tag="h", children="<p>", props={"href": "https://www.google.com", "target": "_blank"})
-        expected_repr = """HTMLNode(h, value=None, <p>, href="https://www.google.com" target="_blank")"""
+        expected_repr = """HTMLNode(h, None, children: <p>, href="https://www.google.com" target="_blank")"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_children(self):
         node = HTMLNode(tag="p", value="this is value text", props={"href": "https://www.google.com", "target": "_blank"})
-        expected_repr = """HTMLNode(p, this is value text, children=None, href="https://www.google.com" target="_blank")"""
+        expected_repr = """HTMLNode(p, this is value text, children: None, href="https://www.google.com" target="_blank")"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_props(self):
         node = HTMLNode("p", "this is value text", "<p>")
-        expected_repr = """HTMLNode(p, this is value text, <p>, props=None)"""
+        expected_repr = """HTMLNode(p, this is value text, children: <p>, )"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_leaf_to_html1(self):

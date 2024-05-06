@@ -1,4 +1,4 @@
-from htmlnode import HTMLNode, LeafNode, ParentNode
+from htmlnode import LeafNode
 
 text_type_text = "text"
 text_type_bold = "bold"
@@ -34,7 +34,7 @@ def text_node_to_html_node(text_node):
     elif text_node.text_type == text_type_code:
         return LeafNode("code", text_node.text)
     elif text_node.text_type == text_type_link:
-        return LeafNode("a", text_node.text, prop={"href": text_node.url})
+        return LeafNode("a", text_node.text, props={"href": text_node.url})
     elif text_node.text_type == text_type_image:
         return LeafNode("img", value="", props={"src": text_node.url, "alt": text_node.text})
     raise ValueError(f"Invalid text type: {text_node.text_type}")
