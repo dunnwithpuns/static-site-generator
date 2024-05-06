@@ -1,6 +1,8 @@
 import unittest
 from inline_markdown import (
     split_nodes_delimiter,
+    extract_md_images,
+    extract_md_links,
 )
 
 from textnode import (
@@ -33,6 +35,16 @@ class testInlineMarkdown(unittest.TestCase):
         node = TextNode("This is an incorrecly **bolded word", text_type_text)
         with self.assertRaises(ValueError):
             split_nodes_delimiter([node], "**", text_type_bold)
+
+    def test_extract_md_images(self):
+        text = "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and ![another](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png)"
+        expected = [("image", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"), ("another", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png")]
+        self.assertEqual(extract_md_images(text), expected)
     
+    def test_extract_md_links(self):
+        text = "This is text with a [link](https://www.example.com) and [another](https://www.example.com/another)"
+        expected = [("link", "https://www.example.com"), ("another", "https://www.example.com/another")]
+        self.assertEqual(extract_md_links(text), expected)
+
 if __name__ == "__main__":
     unittest.main() 
