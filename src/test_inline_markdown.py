@@ -3,6 +3,7 @@ from inline_markdown import (
     split_nodes_delimiter,
     extract_md_images,
     extract_md_links,
+    split_nodes_image
 )
 
 from textnode import (
@@ -11,6 +12,7 @@ from textnode import (
     text_type_bold,
     text_type_italic,
     text_type_code,
+    text_type_image
 )
 
 
@@ -45,6 +47,25 @@ class testInlineMarkdown(unittest.TestCase):
         text = "This is text with a [link](https://www.example.com) and [another](https://www.example.com/another)"
         expected = [("link", "https://www.example.com"), ("another", "https://www.example.com/another")]
         self.assertEqual(extract_md_links(text), expected)
+
+    def test_split_nodes_image_single(self):
+        node = TextNode("This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) cool!", text_type_text)
+        expected = [
+            TextNode("This is text with an ", text_type_text), 
+            TextNode("image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"), 
+            TextNode(" cool!", text_type_text), 
+            ]
+        self.assertEqual(split_nodes_image([node]), expected)
+
+    # def test_spilt_nodes_image_double(self):
+    #     node = TextNode("This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)", text_type_text)
+    #     expected = [
+    #         TextNode("This is text with an ", text_type_text),
+    #         TextNode("image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+    #         TextNode(" and another ", text_type_text),
+    #         TextNode("second image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png"),
+    #         ]
+    #     self.assertEqual(split_nodes_image([node]), expected)
 
 if __name__ == "__main__":
     unittest.main() 
