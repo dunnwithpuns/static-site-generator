@@ -9,7 +9,7 @@ def process_split_nodes(old_node, delimiter, text_type):
     sections = old_node.text.split(delimiter) 
     split_nodes = []
     if len(sections) % 2 == 0:
-        raise ValueError("Invalid markdown, formatted section not closed")
+        raise ValueError(f"Invalid markdown, {delimiter} section not closed")
     for i, sect in enumerate(sections):
         if sect == "":
             continue
