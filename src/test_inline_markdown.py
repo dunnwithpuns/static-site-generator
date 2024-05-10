@@ -64,7 +64,7 @@ class testInlineMarkdown(unittest.TestCase):
             TextNode("image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
             TextNode(" and another ", text_type_text),
             TextNode("second image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png"),
-            ]
+            ] 
         self.assertEqual(split_nodes_image([node]), expected)
 
 if __name__ == "__main__":
