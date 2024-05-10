@@ -9,15 +9,16 @@ from textnode import (
 
 def process_split_nodes_image_single(old_node, image_tups):     
     split_nodes = [] 
+    text = old_node.text
     for image in image_tups: 
-        section = old_node.text.split(f"![{image[0]}]({image[1]})", len(image_tups))
-        for i, sect in enumerate(section):
+        sections = text.split(f"![{image[0]}]({image[1]})", 1)
+        for i, sect in enumerate(sections):
             if sect == "":
                 continue
-            if i % 2 != 0:
+            if i == 1:
                 split_nodes.append(TextNode(image[0], text_type_image, image[1]))
             split_nodes.append(TextNode(sect, text_type_text))
-         
+        text = sections[1]
     return split_nodes
 
 # split image nodes
