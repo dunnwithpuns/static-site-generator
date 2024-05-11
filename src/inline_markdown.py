@@ -7,7 +7,18 @@ from textnode import (
     text_type_link,
 )
 
-# function processing split nodes 
+def text_to_textnodes(text):
+    new_nodes = []
+    old_text = text
+    old_node = TextNode(old_text, text_type_text)
+    delimiters = ["`", "*", "**"]
+    for delimiter in delimiters:
+        if delimiter in old_text:
+            new_nodes.extend(split_nodes_delimiter(old_node, delimiter, text_type_text))
+    new_nodes.extend(split_nodes_image(new_nodes))
+    new_nodes.extend(split_nodes_link(new_nodes))
+    return new_nodes 
+
 def process_split_nodes_delimiter(old_node, delimiter, text_type):
     sections = old_node.text.split(delimiter) 
     split_nodes = []
