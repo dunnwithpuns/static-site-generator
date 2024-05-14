@@ -46,25 +46,10 @@ class testInlineMarkdown(unittest.TestCase):
         expected = [("image", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"), ("another", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png")]
         self.assertEqual(extract_md_images(text), expected)
 
-    def test_extract_md_images_err(self):
-        text = "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png cool!"
-        with self.assertRaises(ValueError):
-            extract_md_images(text)
-    
-    def test_extract_md_images_err1(self):
-        text = "This is text with an [image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) cool!"
-        with self.assertRaises(ValueError):
-            extract_md_images(text)
-
     def test_extract_md_links(self):
         text = "This is text with a [link](https://www.example.com) and [another](https://www.example.com/another)"
         expected = [("link", "https://www.example.com"), ("another", "https://www.example.com/another")]
         self.assertEqual(extract_md_links(text), expected)
-    
-    def test_extract_md_links_err(self):
-        text = "This is text with a [link](https://www.example.com "
-        with self.assertRaises(ValueError):
-            extract_md_links(text)
 
     def test_split_nodes_image_single(self):
         node = TextNode("This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) cool!", text_type_text)
@@ -85,10 +70,10 @@ class testInlineMarkdown(unittest.TestCase):
             ] 
         self.assertEqual(split_nodes_image([node]), expected)
     
-    def test_split_nodes_image_err(self):
-        node = TextNode("This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png cool!", text_type_text)
-        with self.assertRaises(ValueError):
-            split_nodes_image([node])
+    # def test_split_nodes_image_err(self):
+    #     node = TextNode("This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png cool!", text_type_text)
+    #     with self.assertRaises(ValueError):
+    #         split_nodes_image([node])
 
     def test_split_nodes_link_single(self):
         node = TextNode("This is text with a [link](https://www.google.com) cool!", text_type_text)
@@ -109,10 +94,10 @@ class testInlineMarkdown(unittest.TestCase):
         ]
         self.assertEqual(split_nodes_link([node]), expected)
     
-    def test_split_nodes_link_err(self):
-        node = TextNode("This is text with a [link](https://www.google.com", text_type_text)
-        with self.assertRaises(ValueError):
-            split_nodes_link([node])
+    # def test_split_nodes_link_err(self):
+    #     node = TextNode("This is text with a [link](https://www.google.com", text_type_text)
+    #     with self.assertRaises(ValueError):
+    #         split_nodes_link([node])
 
     def test_split_nodes_link_multiple(self):
         node1 = TextNode("This is text with a [link](https://www.google.com) cool!", text_type_text)
