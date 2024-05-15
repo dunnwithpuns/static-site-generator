@@ -14,4 +14,9 @@ def markdown_to_blocks(markdown):
     return blocks 
 
 def block_to_block_type(block):
-    return block_type
+    if block[0] == ">":
+        return block_type_quote
+    elif block[0:1] == "* " or block[0:1] == "- ":
+        return block_type_unordered_list
+    else:
+        return block_type_paragraph
