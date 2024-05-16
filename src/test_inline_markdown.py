@@ -130,4 +130,4 @@ class testInlineMarkdown(unittest.TestCase):
         self.assertEqual(text_to_textnodes(text), expected)
 
 if __name__ == "__main__":
-    unittest.main() 
+     unittest.main()
