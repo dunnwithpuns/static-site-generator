@@ -9,7 +9,6 @@ from textnode import(
     text_type_image,
     text_type_link,
     text_node_to_html_node,
-    split_nodes_delimiter
 )
 from htmlnode import HTMLNode, LeafNode
 
