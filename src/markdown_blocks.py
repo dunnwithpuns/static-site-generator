@@ -17,16 +17,15 @@ def markdown_to_blocks(markdown):
     return filtered_blocks 
 
 def block_to_block_type(block):
-    list_items = block.split("\n")
     if block.startswith(">"):
         return block_type_quote
     elif block.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
         return block_type_heading
+    elif block.startswith("```") and block.endswith("```"):
+        return block_type_code   
+    elif block[0].isdigit():
+        return block_type_ordered_list
     elif block.startswith("* ") or block.startswith("- "):
         return block_type_unordered_list
-    elif block.startswith("```") and block.endswith("```"):
-        return block_type_code  
-    elif block[0].isdigit() and block[1:2] == ". ":
-        return block_type_ordered_list
     else:
         return block_type_paragraph

@@ -41,7 +41,12 @@ class testBlocks(unittest.TestCase):
         self.assertEqual(block_to_block_type(block), expected)
 
     def test_block_to_block_type_ul(self):
-        block = "*This is an unordered list block\n*This is another item in the list"
+        block = "* This is an unordered list block\n* This is another item in the list"
+        expected = block_type_unordered_list
+        self.assertEqual(block_to_block_type(block), expected)
+    
+    def test_block_to_block_type_ul2(self):
+        block = "- This is an unordered list block\n- This is another item in the list"
         expected = block_type_unordered_list
         self.assertEqual(block_to_block_type(block), expected)
 
@@ -53,6 +58,11 @@ class testBlocks(unittest.TestCase):
     def test_block_to_block_type_ol(self):
         block = "1. This is an ordered list block\n2. This is another item in the ordered list"
         expected = block_type_ordered_list
+        self.assertEqual(block_to_block_type(block), expected)
+
+    def test_block_to_block_type_paragraph(self):
+        block = "This is a pargraph block."
+        expected = block_type_paragraph
         self.assertEqual(block_to_block_type(block), expected)
 
 if __name__ == "__main__":
