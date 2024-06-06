@@ -1,3 +1,8 @@
+from htmlnode import(
+    HTMLNode,
+    ParentNode,
+    LeafNode,
+)
 
 block_type_paragraph = "paragraph"
 block_type_heading = "heading"
@@ -15,6 +20,55 @@ def markdown_to_blocks(markdown):
         block = block.strip()
         filtered_blocks.append(block) 
     return filtered_blocks 
+
+def markdown_to_html_node(markdown):
+    blocks = markdown_to_blocks(markdown)
+    nodes = []
+    for block in blocks:
+        html_node = block_to_html_node(block)
+    return ParentNode("div", nodes)
+
+def block_to_html_node(block):
+    block_type = block_to_block_type(block)
+    if block_type == block_type_paragraph:
+        return paragraph_to_html(block)
+    if block_type == block_type_code:
+        return code_to_html(block)
+    if block_type == block_type_quote:
+        return quote_to_html(block)
+    if block_type == block_type_unordered_list:
+        return unordered_to_html(block)
+    if block_type == block_type_ordered_list:
+        return ordered_to_html(block)
+    raise ValueError("Invalid block type")
+
+def paragraph_to_html(block, type):
+    if type != block_type_paragraph:
+        raise ValueError("Invalid block type")
+    return HTMLNode("p", block)
+
+def code_to_html(block, type):
+    if type != block_type_code:
+        raise ValueError("Invalid block type")
+    return ParentNode("pre", LeafNode("code", block))
+
+def quote_to_html(block, type):
+    if type != block_type_quote:
+        raise ValueError("Invalid block type")
+    return HTMLNode("blockquote", block)
+
+def unordered_to_html(block, type):
+    if type != block_type_unordered_list:
+        raise ValueError("Invalid block type")
+    return ParentNode("li", LeafNode("ul", block))
+
+def ordered_to_html(block, type):
+    if type != block_type_ordered_list:
+        raise ValueError("Invalid block type")
+    return ParentNode("li", LeafNode("ol", block))
+
+def heading_to_html(block, type=block_type_heading):
+    return 
 
 def block_to_block_type(block):
     if block.startswith(">"):

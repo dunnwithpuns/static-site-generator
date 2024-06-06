@@ -9,6 +9,14 @@ from markdown_blocks import (
     block_type_quote,
     block_to_block_type,
     block_type_unordered_list,
+    paragraph_to_html,
+    markdown_to_html_node,
+)
+
+from htmlnode import(
+    HTMLNode,
+    ParentNode,
+    LeafNode,
 )
 
 class testBlocks(unittest.TestCase):
@@ -64,6 +72,11 @@ class testBlocks(unittest.TestCase):
         block = "This is a pargraph block."
         expected = block_type_paragraph
         self.assertEqual(block_to_block_type(block), expected)
+
+    def test_paragraph_to_html(self):
+        block = "This is a paragraph block"
+        expected = HTMLNode("p", "This is a paragraph block")
+        self.assertEqual(paragraph_to_html(block, block_type_paragraph), expected)
 
 if __name__ == "__main__":
     unittest.main()
