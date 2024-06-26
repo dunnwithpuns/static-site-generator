@@ -17,8 +17,7 @@ def main():
 
     print(f"Copying files to public directory. . .")
     copy_files(dir_path_static, dir_path_public)
-
-    print(f"Generating page. . .")
+ 
     generate_page(markdown_path, template_path, html_path)
 
 if __name__ == "__main__":
