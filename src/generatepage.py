@@ -21,11 +21,17 @@ def generate_page(from_path, template_path, dest_path):
         template = f.read()
 
     title = extract_title(markdown)
-    html = markdown_to_html_node(markdown)
-    html = html.to_html()
+    node = markdown_to_html_node(markdown)
+    html = node.to_html()
     
     template = template.replace("""{{ Title }}""", title)
     template = template.replace("""{{ Content }}""", html)
 
     with open(dest_path, mode="a") as f:
         f.write(template)
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    if os.path.isfile(dir_path_content):
+        generate_page(dir_path_content, template_path, dest_dir_path)
+    else:
+        pass
