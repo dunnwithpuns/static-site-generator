@@ -14,12 +14,12 @@ class HTMLNode:
             return props_html
 
         for key, value in self.props.items():
-            props_html += f'''{key}=\"{value}\" '''
+            props_html += f''' {key}="{value}"'''
 
         return props_html.rstrip()
 
     def __repr__(self): 
-        return f"HTMLNode({self.tag}, {self.value}, children: {self.children}, {self.props_to_html()})"
+        return f"HTMLNode({self.tag}, {self.value}, children: {self.children},{self.props_to_html()})"
 
     def __eq__(self, other):
         if not isinstance(other, HTMLNode):

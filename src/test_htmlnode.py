@@ -5,7 +5,7 @@ from htmlnode import HTMLNode, LeafNode, ParentNode
 class TestHTMLNode(unittest.TestCase):
     def test_default(self):
         node = HTMLNode()
-        expected_repr = "HTMLNode(None, None, children: None, )"
+        expected_repr = "HTMLNode(None, None, children: None,)"
         self.assertEqual(repr(node), expected_repr)
 
     def test_args(self):
@@ -30,7 +30,7 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_props(self):
         node = HTMLNode("p", "this is value text", "<p>")
-        expected_repr = """HTMLNode(p, this is value text, children: <p>, )"""
+        expected_repr = """HTMLNode(p, this is value text, children: <p>,)"""
         self.assertEqual(repr(node), expected_repr)
 
     def test_leaf_to_html1(self):
